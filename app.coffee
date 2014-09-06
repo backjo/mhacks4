@@ -16,26 +16,18 @@ io.on 'connection', (socket) ->
         choice: firstOption
 
   socket.on 'loadGame', (gameID) ->
-    Game.findOne({_id: gameID}, (err, game) ->
-      if game is not null
+    loadGame gameID, (currentOption) ->
+      if currentOption is not null
         socket.emit 'gameLoad', {
           choice: game.currentOption
         }
-      else
-        console.log 'no game')
 
 
   socket.on 'veto', (gameID, newChoice) ->
-    Game.findOne({_id: gameID}, (err, game) ->
-      if game is not null
-        if game.previousChoices.indexOf(newChoice) is -1
-          game.previousChoices.push game.currentOption
-          game.currentOption = newChoice
-          game.save (err) ->
-            socket.emit 'newChoice', {
-              newChoice: newChoice
-            }
-    )
+    vetoGame gameID, newChoice, () ->
+      socket.emit 'newChoice', {
+        newChoice: newChoice
+      }
 
 
 http.listen 3000, () ->
@@ -49,3 +41,18 @@ initGame = (firstOption, callback) ->
 
   game.save (err) ->
     callback()
+
+loadGame = (gameID, cb) ->
+  Game.findOne({_id: gameID}, (err, game) ->
+    cb game.currentOption
+  )
+
+vetoGame = (gameID, newChoice, cb) ->
+  Game.findOne({_id: gameID}, (err, game) ->
+    if game is not null
+      if game.previousChoices.indexOf(newChoice) is -1
+        game.previousChoices.push game.currentOption
+        game.currentOption = newChoice
+        game.save (err) ->
+          cb newChoice
+  )
