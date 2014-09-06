@@ -1,10 +1,15 @@
 Game = require './models/game.coffee'
+secrets = require './config/secrets'
+yelp = require 'yelp'
+
+yelpClient = yelp.createClient secrets.yelp
 
 module.exports = (io) ->
   io.on 'connection', (socket) ->
     console.log 'user connected'
 
 
+    socket.on 'newGame', (firstOption) ->
     socket.on 'newGame', (firstOption) ->
       console.log('newGame gamed')
       initGame firstOption, (game) ->
@@ -35,6 +40,12 @@ module.exports = (io) ->
         }
         socket.emit 'newChoice', gameObj
         socket.broadcast.emit 'newChoice', gameObj
+
+  socket.on 'yelp', (location) ->
+    location = location || 'Ann Arbor'
+    yelpClient.search {term: 'food', location: location}, (err,data) ->
+      console.log data
+      socket.emit 'yelpData', data
 
 initGame = (firstOption, callback) ->
   game = new Game {
