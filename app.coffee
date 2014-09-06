@@ -6,7 +6,7 @@ mongoose = require 'mongoose'
 Game = require './models/game.coffee'
 app.use(express.static(__dirname + '/public'))
 
-mongoose.connect 'mongodb://localhost/'
+mongoose.connect 'mongodb://localhost/mhacks'
 
 app.get '/', (req, res) ->
   res.sendfile 'public/index.html'
@@ -42,10 +42,11 @@ http.listen 3000, () ->
 initGame = (firstOption, callback) ->
   game = new Game {
     previousChoices: []
-    currentOption: ''
+    currentOption: firstOption
   }
 
   game.save (err) ->
+    console.log err
     callback()
 
 loadGame = (gameID, cb) ->
