@@ -98,7 +98,7 @@ angular.module('Veato', [])
             $window.socket.emit('loadGame', $rootScope.gameId || $scope.gameId);
         };
         $scope.vote = function () {
-            $window.socket.emit('veto', $rootScope.gameId || $scope.gameId, $scope.suggestion);
+            $window.socket.emit('veto', $rootScope.gameId || $scope.gameId, $scope.currentSugg);
         };
     })
     .directive('backImg', function(){
