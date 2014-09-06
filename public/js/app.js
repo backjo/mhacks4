@@ -17,6 +17,11 @@ angular.module('Veato', [])
     })
     .controller('sock', function ($scope, $http, $window) {
         $scope.suggestion = '';
+        $scope.currSugg = '';
+        $window.socket.on('gameLoad', function (returnData) {
+            $scope.currSugg = returnData.choice;
+            $rootScope.gameId = returnData.gameId;
+        });
         $scope.initGame = function (initPlace) {
             console.log('rottentomatoes');
             $window.socket.emit('newGame', $scope.suggestion);
