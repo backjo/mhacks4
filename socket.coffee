@@ -9,7 +9,7 @@ module.exports = (io) ->
       console.log('newGame gamed')
       initGame firstOption, (game) ->
         socket.emit 'gameLoad',
-          gameId: game._id
+          gameId: game.id
           choice: firstOption
 
     socket.on 'loadGame', (gameID) ->
