@@ -19,6 +19,7 @@ angular.module('Veato', [])
     })
     .controller('sock', function ($scope, $http, $window) {
         $scope.initGame = function (initPlace) {
+            console.log('rottentomatoes');
             $window.socket.emit('newGame', 'Chipotle');
         }
     });

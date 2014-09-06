@@ -1,31 +1,17 @@
 {
-<<<<<<< HEAD
-    "name": "Veato",
-    "main": "server.js",
-    "description": "Veato - food fewd solver",
+    "name": "mhacks",
+    "version": "0.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
     "dependencies": {
-        "express": "",
-        "mongoose": "",
-        "body-parser": "",
-        "method-override": "",
-        "morgan": "",
-        "aws-sdk": ""
+        "express": "^4.8.8",
+        "mongoose": "^3.8.15",
+        "mongoose-shortid": "^0.4.1",
+        "socket.io": "^1.1.0"
     }
-=======
-  "name": "mhacks",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.8.8",
-    "mongoose": "^3.8.15",
-    "mongoose-shortid": "^0.4.1",
-    "socket.io": "^1.1.0"
-  }
->>>>>>> 5d83c20ab7ccc12b4b12d6c308df23425168f25e
 }

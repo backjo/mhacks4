@@ -1,16 +1,19 @@
-app = require('express')()
+express = require('express')
+app = express()
 http = require('http').Server app
 io = require('socket.io')(http)
 Game = require './models/game.coffee'
+app.use(express.static(__dirname + '/public'))
 
 app.get '/', (req, res) ->
-  res.sendfile 'index.html'
+  res.sendfile 'public/index.html'
 
 io.on 'connection', (socket) ->
   console.log 'user connected'
 
 
   socket.on 'newGame', (firstOption) ->
+    console.log('newGame gamed')
     initGame firstOption, () ->
       socket.emit 'gameLoad',
         choice: firstOption
