@@ -9,7 +9,7 @@ module.exports = (io) ->
       console.log('newGame gamed')
       initGame firstOption, (game) ->
         socket.emit 'gameLoad',
-          gameId: game._id
+          gameId: game.id
           choice: firstOption
 
     socket.on 'loadGame', (gameID) ->
@@ -24,6 +24,7 @@ module.exports = (io) ->
       vetoGame gameID, newChoice, () ->
         socket.emit 'newChoice', {
           newChoice: newChoice
+          previousChoices: game.previousChoices
         }
 
 initGame = (firstOption, callback) ->
@@ -48,5 +49,5 @@ vetoGame = (gameID, newChoice, cb) ->
         game.previousChoices.push game.currentOption
         game.currentOption = newChoice
         game.save (err) ->
-          cb newChoice
+          cb game
   )
