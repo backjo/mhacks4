@@ -39,7 +39,8 @@ angular.module('Veato', [])
             $window.socket.emit('veto', $rootScope.gameId, $scope.suggestion);
         };
     })
-    .controller('viewCtrl', function($scope, $window, $rootScope) {
+    .controller('viewCtrl', function($scope, $window, $rootScope,  $location) {
+
         $scope.landing = true;
         $scope.joinGameView = false;
         $scope.startGameView = false;
@@ -77,10 +78,13 @@ angular.module('Veato', [])
 
         };
 
+
+
         $scope.suggestion = '';
         $scope.currentSugg = '';
         $rootScope.gameId = '';
         $window.socket.on('gameLoad', function (returnData) {
+            debugger;
             console.log("gameLoad - returnData : " + returnData.choice + " " + returnData.gameId);
             $scope.currentSugg = returnData.choice;
             $rootScope.$apply($rootScope.gameId = returnData.gameId);
@@ -100,6 +104,12 @@ angular.module('Veato', [])
         $scope.vote = function () {
             $window.socket.emit('veto', $rootScope.gameId || $scope.gameId, $scope.currentSugg);
         };
+
+        if($location.search().key) {
+          $scope.changeView('joinGame');
+          $rootScope.gameId = $location.search().key
+          $scope.loadGame();
+        }
     })
     .directive('backImg', function(){
         return function(scope, element, attrs){
