@@ -7,8 +7,9 @@ module.exports = (io) ->
 
     socket.on 'newGame', (firstOption) ->
       console.log('newGame gamed')
-      initGame firstOption, () ->
+      initGame firstOption, (game) ->
         socket.emit 'gameLoad',
+          gameId: game._id
           choice: firstOption
 
     socket.on 'loadGame', (gameID) ->
@@ -33,7 +34,7 @@ initGame = (firstOption, callback) ->
 
   game.save (err) ->
     console.log err
-    callback()
+    callback game
 
 loadGame = (gameID, cb) ->
   Game.findOne({_id: gameID}, (err, game) ->
