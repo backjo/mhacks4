@@ -2,7 +2,7 @@ express = require('express')
 app = express()
 http = require('http').Server app
 io = require('socket.io')(http)
-sockets = require('./socket')(io)
+sockets = require('./socket')(io) #socket transactions
 mongoose = require 'mongoose'
 Game = require './models/game.coffee'
 app.use(express.static(__dirname + '/public'))
