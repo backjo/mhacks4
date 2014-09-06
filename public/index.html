@@ -4,6 +4,7 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"></link>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"></link>
+    <link rel="stylesheet" href="css/custom.css">
     <script src="js/jquery.js" type="text/javascript"></script>
 
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -14,18 +15,50 @@
     <script src="/socket.io/socket.io.js"></script>
     <script> window.socket = io(); </script>
 </head>
-<body ng-app="Veato">
-    <div style="background-color: #2E313D">
-        <img src="img/veatoBigAss.png">
+<body ng-app="Veato" ng-controller="viewCtrl" style="background-color: #23A38F; max-height: 100%; max-width: 100%">
+<div style="background-color: #2E313D" ng-controller="sock">
+    <img src="img/veatoBigAss.png">
+    <h2 style="color: white; float: right; margin-right: 5%;" ng-show="gameId">GameID: {{gameId}}</h2>
+</div>
+
+<div ng-if="landing" class="mCenter centery container">
+    <form class="form-horizontal">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4">
+            <button class="btn btn-lg" style="width: 100%" ng-click="changeView('startGame')">Start A Game</button>
+        </div>
+        <div class="col-sm-4">
+            <button class="btn btn-lg" style="width: 100%" ng-click="changeView('joinGame')">Join a Game</button>
+        </div>
+        <div class="col-sm-2"></div>
+    </form>
+</div>
+<div ng-if="joinGameView">
+    <div class="mcenter centery container">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+            <input ng-model="gameId" class="form-control sexy-box" placeholder="GameID">
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-primary" style="width: 100%" ng-click="changeView('veto');">Join</button>
+        </div>
+        <div class="col-sm-2"></div>
     </div>
 
-    <div ng-controller="flickr" back-img="{{flickUrl}}">
+</div>
+<div ng-if="startGameView">
+    <div ng-controller="sock" style="margin: 0 auto; text-align: center;" class="mcenter centery container">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-5">
+            <input class="form-control sexy-box" ng-model="suggestion" style="width: 100%" placeholder="Suggestion!">
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-primary" id="startGame" ng-click="initGame()">Trigger Sock</button>
+        </div>
+        <div class="col-sm-2"></div>
     </div>
-    <div ng-controller="sock">
-        <h2>{{gameId}}</h2>
-        <input ng-model="suggestion" placeholder="Suggestion!">
-        <button id="startGame" ng-click="initGame()">Trigger Sock</button>
-    </div>
+</div>
+
 
 </body>
 </html>

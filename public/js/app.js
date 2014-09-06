@@ -26,17 +26,56 @@ angular.module('Veato', [])
             $rootScope.$apply($rootScope.gameId = returnData.gameId);
             console.log(returnData);
         });
-        $scope.initGame = function (initPlace) {
+        $scope.initGame = function () {
             console.log('rottentomatoes');
             $window.socket.emit('newGame', $scope.suggestion);
+        }
+    })
+    .controller('viewCtrl', function($scope) {
+        $scope.landing = true;
+        $scope.joinGameView = false;
+        $scope.startGameView = false;
+        $scope.veto = false;
+        $scope.changeView = function (view) {
+            switch(view) {
+                case 'landing':
+                    $scope.landing = true;
+                    $scope.joinGameView = false;
+                    $scope.startGameView = false;
+                    $scope.veto = false;
+                    break;
+                case 'joinGame':
+                    $scope.landing = false;
+                    $scope.joinGameView = true;
+                    $scope.startGameView = false;
+                    $scope.veto = false;
+                    break;
+                case 'startGame':
+                    $scope.landing = false;
+                    $scope.joinGameView = false;
+                    $scope.startGameView = true;
+                    $scope.veto = false;
+                    break;
+                case 'veto':
+                    $scope.landing = false;
+                    $scope.joinGameView = false;
+                    $scope.startGameView = false;
+                    $scope.veto = true;
+                    break;
+            }
+
         }
     })
     .directive('backImg', function(){
         return function(scope, element, attrs){
             attrs.$observe('backImg', function(value) {
                 element.css({
-                    'background-image': 'url(' + value +')',
-                    'background-size' : '100%'
+                    'background-image': 'url("' + value +'")',
+                    'background-size' : '100%',
+                    'min-height' : '60%',
+                    'max-height' : '60%',
+                    'min-width' : '100%',
+                    '-webkit-filter': 'brightness(50%) blur(7.5px)'
                 });
             });
         };
