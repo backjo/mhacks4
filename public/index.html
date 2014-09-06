@@ -39,7 +39,7 @@
             <input ng-model="gameId" type="text" class="form-control sexy-box" placeholder="GameID">
         </div>
         <div class="col-lg-3">
-            <button class="btn btn-primary" style="width: 100%" ng-click="loadGame()">Join</button>
+            <button class="btn btn-primary" style="width: 100%" ng-submit="loadGame()">Join</button>
         </div>
         <div class="col-lg-2"></div>
     </div>
@@ -49,7 +49,7 @@
     <div style="margin: 0 auto; text-align: center;" class="mcenter centery container">
         <div class="col-lg-2"></div>
         <div class="col-lg-5">
-            <input class="form-control sexy-box" type="text" ng-model="currentSugg" style="width: 100%" placeholder="Suggestion!">
+            <input class="form-control sexy-box" type="text" ng-model="suggestion" style="width: 100%" placeholder="Suggestion!">
         </div>
         <div class="col-lg-3">
             <button class="btn btn-primary" id="startGame" ng-click="initGame()">Trigger Sock</button>
@@ -60,7 +60,7 @@
 <div ng-show="veto">
     <div style="margin: 0 auto; text-align: center;" class="mCenter centery container">
         <h1>{{currentSugg}}</h1>
-        <input ng-model="currentSugg" type="text" placeholder="You have a better idea?" class="form-control">
+        <input ng-model="suggestion" type="text" placeholder="You have a better idea?" class="form-control">
         <br>
         <button class="btn btn-primary" ng-click="vote()">Yes I do!</button>
     </div>

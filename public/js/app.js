@@ -22,8 +22,8 @@ angular.module('Veato', [])
         $scope.currentSugg = '';
         $rootScope.gameId = '';
         $window.socket.on('gameLoad', function (returnData) {
-            console.log("gameLoad - returnData : " + returnData.choice + " " + returnData.gameId);
-            $scope.currentSugg = returnData.choice;
+            console.log("gameLoad - returnData : ANGULAR!" + returnData.choice + " " + returnData.gameId);
+            $scope.$apply($scope.currentSugg = returnData.choice);
             $rootScope.$apply($rootScope.gameId = returnData.gameId);
         });
         $scope.initGame = function () {
@@ -91,6 +91,7 @@ angular.module('Veato', [])
         $scope.initGame = function () {
             $scope.$emit('gameStarted');
             $window.socket.emit('newGame', $scope.suggestion);
+            debugger;
         };
         $scope.loadGame = function () {
             $scope.$emit('gameStarted');
