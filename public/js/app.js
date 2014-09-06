@@ -19,23 +19,34 @@ angular.module('Veato', [])
     })
     .controller('sock', function ($scope, $http, $window, $rootScope) {
         $scope.suggestion = '';
-        $scope.currSugg = '';
+        $scope.currentSugg = '';
         $rootScope.gameId = '';
         $window.socket.on('gameLoad', function (returnData) {
-            $scope.currSugg = returnData.choice;
+            console.log("gameLoad - returnData : " + returnData.choice + " " + returnData.gameId);
+            $scope.currentSugg = returnData.choice;
             $rootScope.$apply($rootScope.gameId = returnData.gameId);
-            console.log(returnData);
         });
         $scope.initGame = function () {
-            console.log('rottentomatoes');
+            $scope.$emit('gameStarted');
             $window.socket.emit('newGame', $scope.suggestion);
-        }
+        };
+        $scope.loadGame = function () {
+            $scope.$emit('gameStarted');
+            console.log("loadGame - $rootScope.gameId : " + $rootScope.gameId);
+            $window.socket.emit('loadGame', $rootScope.gameId);
+        };
+        $scope.vote = function () {
+            $window.socket.emit('veto', $rootScope.gameId, $scope.suggestion);
+        };
     })
-    .controller('viewCtrl', function($scope) {
+    .controller('viewCtrl', function($scope, $window, $rootScope) {
         $scope.landing = true;
         $scope.joinGameView = false;
         $scope.startGameView = false;
         $scope.veto = false;
+        $scope.$on('gameStarted', function (args) {
+            $scope.changeView('veto');
+        });
         $scope.changeView = function (view) {
             switch(view) {
                 case 'landing':
@@ -64,7 +75,30 @@ angular.module('Veato', [])
                     break;
             }
 
-        }
+        };
+
+        $scope.suggestion = '';
+        $scope.currentSugg = '';
+        $rootScope.gameId = '';
+        $window.socket.on('gameLoad', function (returnData) {
+            debugger;
+            console.log("gameLoad - returnData : " + returnData.choice + " " + returnData.gameId);
+            $scope.currentSugg = returnData.choice;
+            $rootScope.$apply($rootScope.gameId = returnData.gameId);
+        });
+        $scope.initGame = function () {
+            $scope.$emit('gameStarted');
+            $window.socket.emit('newGame', $scope.suggestion);
+        };
+        $scope.loadGame = function () {
+            $scope.$emit('gameStarted');
+            debugger;
+            console.log("loadGame - $rootScope.gameId : " + $rootScope.gameId);
+            $window.socket.emit('loadGame', $rootScope.gameId || $scope.gameId);
+        };
+        $scope.vote = function () {
+            $window.socket.emit('veto', $rootScope.gameId || $scope.gameId, $scope.suggestion);
+        };
     })
     .directive('backImg', function(){
         return function(scope, element, attrs){

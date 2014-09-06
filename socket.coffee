@@ -14,16 +14,21 @@ module.exports = (io) ->
           previousChoices: null
 
     socket.on 'loadGame', (gameID) ->
-      loadGame gameID, (game) ->
-        if game is not null
+      debugger;
+      loadGame gameID , (game) ->
+        console.log('callback called')
+        console.log(game)
+        if game
+          console.log('game exists')
           socket.emit 'gameLoad', {
+            gameId: game.id
             choice: game.currentOption
             previousChoices: game.previousChoices
           }
 
 
     socket.on 'veto', (gameID, newChoice) ->
-      vetoGame gameID, newChoice, () ->
+      vetoGame gameID, newChoice, (game) ->
         socket.emit 'newChoice', {
           newChoice: newChoice
           previousChoices: game.previousChoices
@@ -41,12 +46,13 @@ initGame = (firstOption, callback) ->
 
 loadGame = (gameID, cb) ->
   Game.findOne({_id: gameID}, (err, game) ->
+    console.log(game)
     cb game
   )
 
 vetoGame = (gameID, newChoice, cb) ->
   Game.findOne({_id: gameID}, (err, game) ->
-    if game is not null
+    if game
       if game.previousChoices.indexOf(newChoice) is -1
         game.previousChoices.push game.currentOption
         game.currentOption = newChoice

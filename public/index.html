@@ -15,13 +15,14 @@
     <script src="/socket.io/socket.io.js"></script>
     <script> window.socket = io(); </script>
 </head>
-<body ng-app="Veato" ng-controller="viewCtrl" style="background-color: #23A38F; max-height: 100%; max-width: 100%">
-<div style="background-color: #2E313D" ng-controller="sock">
+<body ng-app="Veato" ng-controller="viewCtrl" style="background-color: white; max-height: 100%; max-width: 100%">
+<div style="background-color: #2E313D">
     <img src="img/veatoBigAss.png">
-    <h2 style="color: white; float: right; margin-right: 5%;" ng-show="gameId">GameID: {{gameId}}</h2>
+
+    <h2 style="color: white; float: right; margin-right: 5%;">GameID: {{gameId}}</h2>
 </div>
 
-<div ng-if="landing" class="mCenter centery container">
+<div ng-show="landing" class="mCenter centery container">
     <form class="form-horizontal">
         <div class="col-sm-2"></div>
         <div class="col-sm-4">
@@ -33,21 +34,21 @@
         <div class="col-sm-2"></div>
     </form>
 </div>
-<div ng-if="joinGameView">
+<div ng-show="joinGameView">
     <div class="mcenter centery container">
         <div class="col-sm-2"></div>
         <div class="col-sm-5">
             <input ng-model="gameId" class="form-control sexy-box" placeholder="GameID">
         </div>
         <div class="col-sm-3">
-            <button class="btn btn-primary" style="width: 100%" ng-click="changeView('veto');">Join</button>
+            <button class="btn btn-primary" style="width: 100%" ng-click="loadGame()">Join</button>
         </div>
         <div class="col-sm-2"></div>
     </div>
 
 </div>
-<div ng-if="startGameView">
-    <div ng-controller="sock" style="margin: 0 auto; text-align: center;" class="mcenter centery container">
+<div ng-show="startGameView">
+    <div style="margin: 0 auto; text-align: center;" class="mcenter centery container">
         <div class="col-sm-2"></div>
         <div class="col-sm-5">
             <input class="form-control sexy-box" ng-model="suggestion" style="width: 100%" placeholder="Suggestion!">
@@ -58,7 +59,13 @@
         <div class="col-sm-2"></div>
     </div>
 </div>
-
-
+<div ng-show="veto">
+    <div style="margin: 0 auto; text-align: center;" class="mCenter centery container">
+        <h1>{{currentSugg}}</h1>
+        <input ng-model="suggestion" placeholder="You have a better idea?" class="form-control">
+        <br>
+        <button class="btn btn-primary" ng-click="vote()">Yes I do!</button>
+    </div>
+</div>
 </body>
 </html>
