@@ -41,11 +41,11 @@ module.exports = (io) ->
         socket.emit 'newChoice', gameObj
         socket.broadcast.emit 'newChoice', gameObj
 
-  socket.on 'yelp', (location) ->
-    location = location || 'Ann Arbor'
-    yelpClient.search {term: 'food', location: location}, (err,data) ->
-      console.log data
-      socket.emit 'yelpData', data
+    socket.on 'yelp', (location) ->
+      location = location || 'Ann Arbor'
+      yelpClient.search {term: 'food', location: location}, (err,data) ->
+        console.log data
+        socket.emit 'yelpData', data
 
 initGame = (firstOption, callback) ->
   game = new Game {
