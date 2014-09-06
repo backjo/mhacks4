@@ -29,10 +29,12 @@ module.exports = (io) ->
 
     socket.on 'veto', (gameID, newChoice) ->
       vetoGame gameID, newChoice, (game) ->
-        socket.emit 'newChoice', {
+        gameObj = {
           newChoice: newChoice
           previousChoices: game.previousChoices
         }
+        socket.emit 'newChoice', gameObj
+        socket.broadcast.emit 'newChoice', gameObj
 
 initGame = (firstOption, callback) ->
   game = new Game {
