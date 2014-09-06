@@ -1,0 +1,13 @@
+{
+    "name": "Veato",
+    "main": "server.js",
+    "description": "Veato - food fewd solver",
+    "dependencies": {
+        "express": "",
+        "mongoose": "",
+        "body-parser": "",
+        "method-override": "",
+        "morgan": "",
+        "aws-sdk": ""
+    }
+}
