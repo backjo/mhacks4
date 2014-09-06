@@ -81,10 +81,12 @@ angular.module('Veato', [])
         $scope.currentSugg = '';
         $rootScope.gameId = '';
         $window.socket.on('gameLoad', function (returnData) {
-            debugger;
             console.log("gameLoad - returnData : " + returnData.choice + " " + returnData.gameId);
             $scope.currentSugg = returnData.choice;
             $rootScope.$apply($rootScope.gameId = returnData.gameId);
+        });
+        $window.socket.on('newChoice', function (returnData) {
+            $scope.$apply($scope.currentSugg = returnData.newChoice);
         });
         $scope.initGame = function () {
             $scope.$emit('gameStarted');
@@ -92,7 +94,6 @@ angular.module('Veato', [])
         };
         $scope.loadGame = function () {
             $scope.$emit('gameStarted');
-            debugger;
             console.log("loadGame - $rootScope.gameId : " + $rootScope.gameId);
             $window.socket.emit('loadGame', $rootScope.gameId || $scope.gameId);
         };
