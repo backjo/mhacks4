@@ -18,8 +18,9 @@ angular.module('Veato', [])
         };
     })
     .controller('sock', function ($scope, $http, $window) {
+        $scope.suggestion = '';
         $scope.initGame = function (initPlace) {
             console.log('rottentomatoes');
-            $window.socket.emit('newGame', 'Chipotle');
+            $window.socket.emit('newGame', $scope.suggestion);
         }
     });
