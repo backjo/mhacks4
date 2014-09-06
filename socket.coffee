@@ -11,12 +11,14 @@ module.exports = (io) ->
         socket.emit 'gameLoad',
           gameId: game.id
           choice: firstOption
+          previousChoices: null
 
     socket.on 'loadGame', (gameID) ->
-      loadGame gameID, (currentOption) ->
-        if currentOption is not null
+      loadGame gameID, (game) ->
+        if game is not null
           socket.emit 'gameLoad', {
             choice: game.currentOption
+            previousChoices: game.previousChoices
           }
 
 
@@ -39,7 +41,7 @@ initGame = (firstOption, callback) ->
 
 loadGame = (gameID, cb) ->
   Game.findOne({_id: gameID}, (err, game) ->
-    cb game.currentOption
+    cb game
   )
 
 vetoGame = (gameID, newChoice, cb) ->
