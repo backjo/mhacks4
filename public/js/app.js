@@ -15,12 +15,13 @@ angular.module('Veato', [])
             return "https://farm" + farmId + ".staticflickr.com/" + serverId + "/" + id + "_" + secret + ".jpg"
         };
     })
-    .controller('sock', function ($scope, $http, $window) {
+    .controller('sock', function ($scope, $http, $window, $rootScope) {
         $scope.suggestion = '';
         $scope.currSugg = '';
         $window.socket.on('gameLoad', function (returnData) {
             $scope.currSugg = returnData.choice;
             $rootScope.gameId = returnData.gameId;
+            console.log(returnData);
         });
         $scope.initGame = function (initPlace) {
             console.log('rottentomatoes');
