@@ -15,10 +15,14 @@
     <script> window.socket = io(); </script>
 </head>
 <body ng-app="Veato">
-    <div ng-controller="flickr">
-        <img ng-src="{{flickUrl}}">
+    <div style="background-color: #2E313D">
+        <img src="img/veatoBigAss.png">
+    </div>
+
+    <div ng-controller="flickr" back-img="{{flickUrl}}">
     </div>
     <div ng-controller="sock">
+        <h2>{{gameId}}</h2>
         <input ng-model="suggestion" placeholder="Suggestion!">
         <button id="startGame" ng-click="initGame()">Trigger Sock</button>
     </div>
