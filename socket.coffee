@@ -10,17 +10,17 @@ module.exports = (io) ->
 
 
     socket.on 'newGame', (firstOption) ->
-    socket.on 'newGame', (firstOption) ->
       console.log('newGame gamed')
       initGame firstOption, (game) ->
+        socket.join game.id
         socket.emit 'gameLoad',
           gameId: game.id
           choice: firstOption
           previousChoices: null
 
     socket.on 'loadGame', (gameID) ->
-      debugger;
       loadGame gameID , (game) ->
+        socket.join game.id
         console.log('callback called')
         console.log(game)
         if game
@@ -38,8 +38,7 @@ module.exports = (io) ->
           newChoice: newChoice
           previousChoices: game.previousChoices
         }
-        socket.emit 'newChoice', gameObj
-        socket.broadcast.emit 'newChoice', gameObj
+        socket.to(gameID).broadcast.emit('newChoice', gameObj);
 
     socket.on 'yelp', (location) ->
       location = location || 'Ann Arbor'
