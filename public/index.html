@@ -22,8 +22,8 @@
 <div style="background-color: #2E313D" class="top">
     <img src="img/veatoBigAss.png" class="header">
     <h2 style="color: white; float: right; margin-right: 5%;" ng-show="gameId">GameID: {{gameId}}</h2>
-    <button class="btn btn-lg top-right" ng-hide="gameId" ng-click="changeView('joinGame')">Join</button>
-    <button class="btn btn-lg top-right" ng-show='gameId' clip-copy="getTextToCopy()">Copy Link to This Game!</button>
+    <button class="btn btn-lg top-right" ng-hide="gameId || joinGameView" ng-click="changeView('joinGame')">Join</button>
+    <button class="btn btn-lg top-right hidden-sm hidden-xs" ng-show='gameId' clip-copy="getTextToCopy()">Copy Link to This Game!</button>
 </div>
 
 <div ng-show="landing" class="container signInBox">
