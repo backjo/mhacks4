@@ -2,7 +2,7 @@
  * Created by curtis on 9/5/14.
  */
 
-angular.module('Veato', [])
+angular.module('Veato', ['ngClipboard'])
     .controller('flickr', function ($scope, $http) {
         $scope.flickUrl = null;
         $http.get("https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=3c5164fc23695f213d4f048904312e1c&tags=Food&sort=interestingness-desc&format=json&nojsoncallback=1&auth_token=72157646875635030-94f0d0cfff1e563f&api_sig=de75fa2b7b86f8440023df925e02c50b")
@@ -84,7 +84,6 @@ angular.module('Veato', [])
         $scope.previousChoices = [];
         $rootScope.gameId = '';
         $window.socket.on('gameLoad', function (returnData) {
-            debugger;
             console.log("gameLoad - returnData : " + returnData.choice + " " + returnData.gameId);
 
             $rootScope.$apply(function(){
@@ -115,7 +114,7 @@ angular.module('Veato', [])
 
         if($location.search().key) {
           $scope.changeView('joinGame');
-          $rootScope.gameId = $location.search().key
+          $rootScope.gameId = $location.search().key;
           $scope.loadGame();
         }
     })

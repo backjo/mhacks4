@@ -30,20 +30,28 @@ div.centery {
 }
 
 .top-right {
-    position: fixed;
-    top: 5%;
+    position: absolute;
+    top: 15%;
     right: 5%;
 }
 
 .top {
-    position: fixed;
+    position: absolute;
     top: 0;
+    right: 0;
+    left: 0;
+}
+
+.bottom {
+    position: fixed;
+    top: 50%;
     right: 0;
     left: 0;
 }
 
 img.header {
     margin: 5px;
+    min-width: 45px;
 }
 
 div.signInBox {
@@ -52,10 +60,39 @@ div.signInBox {
     position: relative;
     margin-top: 20%;
     width: 45%;
+    min-width: 300px;
+}
+
+.gameBox {
+    position: absolute;
+    margin-top: 35%;
+    min-width: 300px;
 }
 
 form.initiateGame input {
     width: 60%;
     margin: 8% auto;
     text-align: center;
+}
+h1 {
+    margin-bottom: 5%;
+    font-size: 10vw;
+}
+ul {
+    list-style-type: none;
+}
+li {
+    border: 2px solid #23A38F;
+    border-left-width: 30px;
+    margin-left: -40px;
+}
+
+#footer {
+    padding-right: 15px;
+    padding-left: 15px;
+    width:100%;
+    height:3%;
+    position:absolute;
+    bottom:0;
+    left:0;
 }
