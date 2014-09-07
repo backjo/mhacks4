@@ -36,7 +36,7 @@
                 <input ng-model="gameId" type="text" autofocus="joinGameView" class="form-control sexy-box" placeholder="GameID">
             </div>
             <div class="col-lg-3">
-                <button class="btn btn-primary" style="width: 100%" ng-click="loadGame()">Join</button>
+                <button class="btn btn-primary" style="width: 100%">Join</button>
             </div>
             <div class="col-lg-2"></div>
         </div>
@@ -48,7 +48,7 @@
             <h1>{{currentSugg}}</h1>
             <input ng-model="suggestion" name="suggestionBox" type="text" autofocus="veto" placeholder="You have a better idea?" class="form-control">
             <br>
-            <button class="btn btn-primary" style="width: 40%; height: 400px;" ng-click="vote()" ng-disabled="!suggestion">VETO!</button>
+            <button class="btn btn-primary" style="width: 40%; height: 400px;" ng-disabled="!suggestion">VETO!</button>
             <br><br>
         </div>
     </form>
