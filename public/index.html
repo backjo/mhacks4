@@ -48,7 +48,8 @@
             <button class="btn btn-primary" style="width: 40%;" ng-disabled="!suggestion">VETO!</button>
         </form>
     </div>
-    <div class="col-lg-3" style="margin-top: 20%;">
+    <div class="col-lg-3 hidden-sm hidden-xs" style="margin-top: 20%;">
+        <div class=".visible-xs-* .visible-sm-*" style="opacity: 0; background-color: black; height: 30%;"></div>
         <h3>History</h3>
         <ul>
             <li ng-repeat="value in previousChoices track by $index">{{value}}</li>
