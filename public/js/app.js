@@ -76,9 +76,6 @@ angular.module('Veato', ['ngClipboard'])
                     break;
             }
         };
-
-
-
         $scope.suggestion = '';
         $scope.currentSugg = '';
         $scope.previousChoices = [];
@@ -117,6 +114,9 @@ angular.module('Veato', ['ngClipboard'])
           $rootScope.gameId = $location.search().key;
           $scope.loadGame();
         }
+        $scope.getTextToCopy = function () {
+            return $location.absUrl() + "/#/?key=" + ($scope.gameId || $rootScope.gameId);
+        };
     })
     .directive('backImg', function(){
         return function(scope, element, attrs){

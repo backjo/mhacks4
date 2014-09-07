@@ -22,32 +22,25 @@
 <div style="background-color: #2E313D" class="top">
     <img src="img/veatoBigAss.png" class="header">
     <h2 style="color: white; float: right; margin-right: 5%;" ng-show="gameId">GameID: {{gameId}}</h2>
-    <button class="btn btn-lg top-right" ng-hide="gameId">Join</button>
+    <button class="btn btn-lg top-right" ng-hide="gameId" ng-click="changeView('joinGame')">Join</button>
+    <button class="btn btn-lg top-right" ng-show='gameId' clip-copy="getTextToCopy()">Copy Link to This Game!</button>
 </div>
 
 <div ng-show="landing" class="container signInBox">
-    <form class="initiateGame">
+    <form class="initiateGame" ng-submit="initGame()">
         <input type="text" ng-model="city" class="form-control" placeholder="What city are you in?">
         <input type="text" ng-model="suggestion" class="form-control" placeholder="What are we having?">
-        <button class="btn btn-lg" ng-click="initGame()">Start A Game</button>
+        <button class="btn btn-lg">Start New Game</button>
     </form>
 </div>
-<div ng-show="joinGameView">
-    <form ng-submit="loadGame()">
-        <div class="mcenter centery container">
-            <div class="col-lg-2"></div>
-            <div class="col-lg-5">
-                <input ng-model="gameId" type="text" autofocus="joinGameView" class="form-control sexy-box" placeholder="GameID">
-            </div>
-            <div class="col-lg-3">
-                <button class="btn btn-primary" style="width: 100%">Join</button>
-            </div>
-            <div class="col-lg-2"></div>
-        </div>
+<div ng-show="joinGameView" class="container signInBox">
+    <form class="initiateGame" ng-submit="loadGame()">
+        <input ng-model="gameId" type="text" autofocus="joinGameView" class="form-control" placeholder="Invitation Code">
+        <button class="btn btn-lg">Start This Game</button>
     </form>
 </div>
 <div ng-show="veto" class="container row">
-    <div class="col-lg-9">
+    <div class="col-lg-9" style="text-align: center; width: 60%">
         <form ng-submit="vote()" class="gameBox">
             <h1>{{currentSugg}}</h1>
             <input ng-model="suggestion" name="suggestionBox" type="text" autofocus="veto" placeholder="You have a better idea?" class="form-control">
