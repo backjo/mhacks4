@@ -20,12 +20,12 @@
     <img src="img/veatoBigAss.png" class="header">
     <h2 style="color: white; float: right; margin-right: 5%;" ng-show="gameId">GameID: {{gameId}}</h2>
 </div>
-<button class="btn btn-lg top-right" ng-click="changeView('joinGame')">Join</button>
-<div ng-show="landing" class="container-fluid signInBox">
+<button class="btn btn-lg top-right" ng-hide="gameId">Join</button>
+<div ng-show="landing" class="container signInBox">
     <form class="initiateGame">
-        <input type="text" ng-model="city" class="form-control">
-        <input type="text" ng-model="suggestion" class="form-control">
-        <button class="btn btn-lg" style="width: 100%" ng-click="changeView('startGame')">Start A Game</button>
+        <input type="text" ng-model="city" class="form-control" placeholder="What city are you in?">
+        <input type="text" ng-model="suggestion" class="form-control" placeholder="Where would you like to eat?">
+        <button class="btn btn-lg" ng-click="initGame()">Start A Game</button>
     </form>
 </div>
 <div ng-show="joinGameView">
@@ -41,18 +41,6 @@
             <div class="col-lg-2"></div>
         </div>
     </form>
-</div>
-<div ng-show="startGameView">
-    <div style="margin: 0 auto; text-align: center;" class="mcenter centery container">
-        <div class="col-lg-2"></div>
-        <div class="col-lg-5">
-            <input class="form-control sexy-box" type="text" ng-model="suggestion" style="width: 100%" placeholder="Suggestion!">
-        </div>
-        <div class="col-lg-3">
-            <button class="btn btn-primary" id="startGame" ng-click="initGame()">Start Game!</button>
-        </div>
-        <div class="col-lg-2"></div>
-    </div>
 </div>
 <div ng-show="veto">
     <form ng-submit="vote()">
