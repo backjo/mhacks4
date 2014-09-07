@@ -10,7 +10,7 @@ module.exports = (io) ->
 
 
     socket.on 'newGame', (firstOption) ->
-      console.log('newGame gamed')
+      console.log('newGame gamed with option' + '' + firstOption)
       initGame firstOption, (game) ->
         socket.join game.id
         socket.emit 'gameLoad',
@@ -39,6 +39,7 @@ module.exports = (io) ->
           previousChoices: game.previousChoices
         }
         socket.to(gameID).broadcast.emit('newChoice', gameObj);
+        socket.emit('newChoice', gameObj);
 
     socket.on 'yelp', (location) ->
       location = location || 'Ann Arbor'
@@ -66,8 +67,11 @@ vetoGame = (gameID, newChoice, cb) ->
   Game.findOne({_id: gameID}, (err, game) ->
     if game
       if game.previousChoices.indexOf(newChoice) is -1
+        console.log "pushed option: #{game.currentOption}"
+        console.log "set current option: #{newChoice}"
         game.previousChoices.push game.currentOption
         game.currentOption = newChoice
         game.save (err) ->
+          console.log game
           cb game
   )

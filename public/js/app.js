@@ -81,15 +81,23 @@ angular.module('Veato', [])
 
         $scope.suggestion = '';
         $scope.currentSugg = '';
+        $scope.previousChoices = [];
         $rootScope.gameId = '';
         $window.socket.on('gameLoad', function (returnData) {
             debugger;
             console.log("gameLoad - returnData : " + returnData.choice + " " + returnData.gameId);
-            $scope.currentSugg = returnData.choice;
-            $rootScope.$apply($rootScope.gameId = returnData.gameId);
+
+            $rootScope.$apply(function(){
+              $rootScope.gameId = returnData.gameId;
+              $scope.currentSugg = returnData.choice;
+              $scope.previousChoices = returnData.previousChoices;
+            });
         });
         $window.socket.on('newChoice', function (returnData) {
-            $scope.$apply($scope.currentSugg = returnData.newChoice);
+            $scope.$apply(function(){
+              $scope.currentSugg = returnData.newChoice;
+              $scope.previousChoices = returnData.previousChoices;
+            });
         });
         $scope.initGame = function () {
             $scope.$emit('gameStarted');
