@@ -28,3 +28,33 @@ div.centery {
     text-align: center;
     align-content: center;
 }
+
+.top-right {
+    position: fixed;
+    top: 5%;
+    right: 5%;
+}
+
+.top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+img.header {
+    margin: 5px;
+}
+
+.signInBox {
+    border-bottom-width: 5px;
+    border-right-width: 5px;
+    border-left-width: 5px;
+    border-top-width: 15px;
+}
+
+form.initiateGame input {
+    width: 45%;
+    margin: 5% auto;
+    text-align: center;
+}

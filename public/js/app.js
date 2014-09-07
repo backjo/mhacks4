@@ -74,7 +74,6 @@ angular.module('Veato', [])
                     $scope.veto = true;
                     break;
             }
-
         };
 
         $scope.suggestion = '';
@@ -91,7 +90,6 @@ angular.module('Veato', [])
         $scope.initGame = function () {
             $scope.$emit('gameStarted');
             $window.socket.emit('newGame', $scope.suggestion);
-            debugger;
         };
         $scope.loadGame = function () {
             $scope.$emit('gameStarted');
@@ -99,7 +97,8 @@ angular.module('Veato', [])
             $window.socket.emit('loadGame', $rootScope.gameId || $scope.gameId);
         };
         $scope.vote = function () {
-            $window.socket.emit('veto', $rootScope.gameId || $scope.gameId, $scope.currentSugg);
+            $window.socket.emit('veto', $rootScope.gameId || $scope.gameId, $scope.suggestion);
+            $scope.currentSugg = $scope.suggestion;
         };
     })
     .directive('backImg', function(){
